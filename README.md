@@ -19,7 +19,7 @@ resource "yandex_storage_object" "image" {
   secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
   bucket  = yandex_storage_bucket.bucket.bucket
   key     = "1.jpg"
-  source  = "/home/dev/clopro-homeworks-15.2/1.jpg"
+  source  = "/home/bev/clopro-homeworks-15.2/1.jpg"
   acl     = "public-read"
 }
 ```
@@ -129,6 +129,47 @@ users:
 
 ![Screenshot_4](https://github.com/user-attachments/assets/14fee604-368f-4114-8dbf-517afa1e68d7)
 
+# Задание 3. 
+## loadbalancer.tf
+```hcl
+resource "yandex_lb_target_group" "lamp_target_group" {
+  name = "lamp-target-group"
+
+  dynamic "target" {
+    for_each = yandex_compute_instance_group.lamp_group.instances
+    content {
+      address   = target.value.network_interface[0].ip_address
+      subnet_id = yandex_vpc_subnet.subnet.id
+    }
+  }
+}
+
+resource "yandex_lb_network_load_balancer" "lb" {
+  name = "lamp-load-balancer"
+
+  listener {
+    name        = "listener-http"
+    port        = 80
+    target_port = 80
+    protocol    = "tcp"
+  }
+
+  attached_target_group {
+    target_group_id = yandex_lb_target_group.lamp_target_group.id
+
+    healthcheck {
+      name = "http-check"
+      http_options {
+        port = 80
+        path = "/"
+      }
+    }
+  }
+}
+```
+![Screenshot_7](https://github.com/user-attachments/assets/969f224e-c7e7-43bb-b82a-f6b994cb7964)
+![Screenshot_5](https://github.com/user-attachments/assets/28d49d4e-967b-4cfe-9d89-1a4658833532)
+![Screenshot_8](https://github.com/user-attachments/assets/5946af82-004b-4ff4-a30f-68c16ce6ddcd)
 
 
 
