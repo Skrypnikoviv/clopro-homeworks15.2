@@ -1,5 +1,5 @@
 # Домашнее задание к занятию «Вычислительные мощности. Балансировщики нагрузки» - Скрыпников Илья
-# Задание 1. Yandex Cloud
+# Задание 1.
 ## storage.tf
 ```hcl
 resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
@@ -24,7 +24,7 @@ resource "yandex_storage_object" "image" {
 }
 ```
 ![Screenshot_1](https://github.com/user-attachments/assets/0a4cf511-e84e-4a9f-8579-8f88f80f3212)
-
+# Задание 2. 
 ## main.tf
 ```hcl
 resource "yandex_vpc_network" "network" {
