@@ -24,6 +24,7 @@ resource "yandex_storage_object" "image" {
 }
 ```
 ![Screenshot_1](https://github.com/user-attachments/assets/0a4cf511-e84e-4a9f-8579-8f88f80f3212)
+
 ## main.tf
 ```hcl
 resource "yandex_vpc_network" "network" {
