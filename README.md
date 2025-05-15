@@ -94,3 +94,31 @@ resource "yandex_compute_instance_group" "lamp_group" {
   }
 }
 ```
+##cloud-init.yaml
+```hcl
+#cloud-config
+write_files:
+  - path: /var/www/html/index.html
+    content: |
+      <html>
+      <body>
+        <h1>Welcome to LAMP</h1>
+        <p>This is a test web page served from a LAMP stack on Yandex Cloud.</p>
+        <img src="https://storage.yandexcloud.net/skrypnikov-05-15-2025/1.jpg" alt="Image">
+      </body>
+      </html>
+    owner: www-data:www-data
+    permissions: '0644'
+
+runcmd:
+  - systemctl restart apache2
+  - systemctl enable apache2
+
+users:
+  - name: ${var.ssh_user}
+    groups: sudo
+    shell: /bin/bash
+    sudo: 'ALL=(ALL) NOPASSWD:ALL'
+    ssh_authorized_keys:
+      - ${file("${var.ssh_public_key}")}
+```
