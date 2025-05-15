@@ -123,3 +123,11 @@ users:
     ssh_authorized_keys:
       - ${file("${var.ssh_public_key}")}
 ```
+![Screenshot_2](https://github.com/user-attachments/assets/fea81516-72fb-4473-97db-ee52efedcc63)
+
+![Screenshot_3](https://github.com/user-attachments/assets/6add3269-7d8e-418a-a314-799fdaac129e)
+
+![Screenshot_4](https://github.com/user-attachments/assets/f0d3f5c5-5273-435a-8c20-5afef2b5a959)
+
+
+
