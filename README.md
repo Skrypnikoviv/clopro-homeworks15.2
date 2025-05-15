@@ -95,7 +95,7 @@ resource "yandex_compute_instance_group" "lamp_group" {
   }
 }
 ```
-##cloud-init.yaml
+## cloud-init.yaml
 ```hcl
 #cloud-config
 write_files:
